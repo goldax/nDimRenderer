@@ -1,0 +1,12 @@
+{
+	"eqnull": true,
+	"esnext": true,
+	"globals": {
+		"window": true,
+		"document": true
+	},
+	"node": true,
+	"loopfunc": true,
+	"phantom": true,
+	"strict": true
+}

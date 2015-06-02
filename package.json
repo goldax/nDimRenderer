@@ -1,0 +1,9 @@
+{
+	"name": "ndim_render",
+	"version": "0.1.0",
+	"author": "ich",
+	"dependencies": {
+		"systemjs": "0.16.11",
+		"js-priority-queue": "0.1.1"
+	}
+}
