@@ -27,6 +27,11 @@ class Vector {
 			return res + val;
 		}, 0);
 	}
+	get absManhattenLength() {
+		return this.values.reduce(function(res, val) {
+			return res + Math.abs(val);
+		}, 0);
+	}
 	get dim() {
 		return this.values.length;
 	}

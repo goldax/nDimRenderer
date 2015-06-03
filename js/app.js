@@ -7,11 +7,16 @@ var canvasManager = require("./canvasManager"),
 	Triangle = require('./drawables/Triangle'),
 	Vector = require('./Vector');
 
-canvasManager.addObject(new Triangle([
-	new Vector(10, 10, 10),
-	new Vector(10, 0, 10),
-	new Vector(0, 0, 10)
-],{fill:"red"}));
+var ecken = [];
+var dim = 3;
+for(var i = 0; i < Math.pow(2, dim); i++) {
+	let key = i.toString(2);
+	ecken.push(new Vector(key.split("")));
+}
+
+for(var i = 0; i < dim; i++) {
+
+}
 
 canvasManager.coord = new CoordinateSystem([
 	new Vector(5, 0),
