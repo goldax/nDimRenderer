@@ -20,6 +20,6 @@ module.exports = class CordinateSystem {
 				return res;
 			}
 			return res.add(that.axes[i].clone().scale(val));
-		}, new Vector(0, 0));
+		}, new Vector(400, 300));
 	}
 };

@@ -3,7 +3,8 @@
 	"esnext": true,
 	"globals": {
 		"window": true,
-		"document": true
+		"document": true,
+		"fetch": true
 	},
 	"node": true,
 	"loopfunc": true,
