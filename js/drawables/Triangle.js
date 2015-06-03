@@ -28,11 +28,16 @@ module.exports = class Triangle {
 		context.strokeStyle = this.style.stroke.color;
 		context.lineWidth = this.style.stroke.width;
 		context.lineCap = this.style.stroke.cap;
-		var pos1 = projection(this.position1),
-			pos2 = projection(this.position2);
+		var pos1 = projection(this.vertices[0]),
+			pos2 = projection(this.vertices[1]),
+			pos3 = projection(this.vertices[2]);
 		context.moveTo(pos1.get(0), pos1.get(1));
 		context.lineTo(pos2.get(0), pos2.get(1));
+		context.lineTo(pos3.get(0), pos3.get(1));
+		context.lineTo(pos1.get(0), pos1.get(1));
 		context.stroke();
+		context.fillStyle = this.style.fill;
+		context.fill();
 		context.closePath();
 	}
 };

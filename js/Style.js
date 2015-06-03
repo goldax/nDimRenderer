@@ -1,6 +1,7 @@
 "use strict";
 
 const defaultStyle = {
+	fill: "transparent",
 	stroke: {
 		color: "#000",
 		width: 1,
@@ -13,19 +14,22 @@ module.exports = class Style {
 		if(style instanceof Style) {
 			return style;
 		}
-		style = mergeObject(style, defaultStyle);
-		this.fill = style.fill || "transparent";
-		this.stroke = mergeObject(style.stroke, defaultStyle.stroke);
+		mergeObject(style, defaultStyle, this);
 	}
 };
 
-function mergeObject(obj, preset) {
-	var res = {};
+function mergeObject(obj, preset, target) {
+	var res = target || {};
 	if(obj === null || typeof obj !== "object") {
-		return preset;
+		obj = {};
 	}
 	for(let key in preset) {
-		res[key] = key in obj ? obj[key] : preset[key];
+		if(typeof preset[key] === "object") {
+			res[key] = mergeObject(obj[key], preset[key]);
+		}
+		else {
+			res[key] = key in obj ? obj[key] : preset[key];
+		}
 	}
 	return res;
 }
