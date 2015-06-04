@@ -25,7 +25,17 @@ function mergeObject(obj, preset, target) {
 	}
 	for(let key in preset) {
 		if(typeof preset[key] === "object") {
-			res[key] = mergeObject(obj[key], preset[key]);
+			let value;
+			Object.defineProperty(res, key, {
+				get() {
+					return value;
+				},
+				set(newValue) {
+					value = mergeObject(newValue, preset[key]);
+				},
+				enumerable: true
+			});
+			res[key] = obj[key];
 		}
 		else {
 			res[key] = key in obj ? obj[key] : preset[key];

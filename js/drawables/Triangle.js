@@ -1,10 +1,11 @@
 "use strict";
 
-var Vector = require('../Vector'),
-	Style = require('Style');
+var Vector = require("../Vector"),
+	Style = require("../Style");
 
-module.exports = class Triangle {
+module.exports = class Triangle extends require("./Drawable") {
 	constructor(verts, style) {
+		super();
 		this.vertices = [];
 		if(typeof verts === "object" && verts !== null && Symbol.iterator in verts) {
 			for(let val of verts) {
@@ -21,13 +22,10 @@ module.exports = class Triangle {
 	}
 	get priority() {
 		var verts = this.vertices;
-		return [-1, verts[0].clone().add(verts[1]).add(verts[2]).scale(1/3).manhattenLength];
+		return [-1, verts[0].clone().add(verts[1]).add(verts[2]).scale(1 / 3).manhattenLength];
 	}
 	draw(context, projection) {
 		context.beginPath();
-		context.strokeStyle = this.style.stroke.color;
-		context.lineWidth = this.style.stroke.width;
-		context.lineCap = this.style.stroke.cap;
 		var pos1 = projection(this.vertices[0]),
 			pos2 = projection(this.vertices[1]),
 			pos3 = projection(this.vertices[2]);
@@ -35,9 +33,18 @@ module.exports = class Triangle {
 		context.lineTo(pos2.get(0), pos2.get(1));
 		context.lineTo(pos3.get(0), pos3.get(1));
 		context.lineTo(pos1.get(0), pos1.get(1));
-		context.stroke();
-		context.fillStyle = this.style.fill;
-		context.fill();
+		var width = this.style.stroke.width,
+			fill = this.style.fill;
+		if(width) {
+			context.strokeStyle = this.style.stroke.color;
+			context.lineWidth = width;
+			context.lineCap = this.style.stroke.cap;
+			context.stroke();
+		}
+		if(fill !== "transparent") {
+			context.fillStyle = this.style.fill;
+			context.fill();
+		}
 		context.closePath();
 	}
 };

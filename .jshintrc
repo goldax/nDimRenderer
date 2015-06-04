@@ -1,11 +1,7 @@
 {
 	"eqnull": true,
 	"esnext": true,
-	"globals": {
-		"window": true,
-		"document": true,
-		"fetch": true
-	},
+	"browser": true,
 	"node": true,
 	"loopfunc": true,
 	"phantom": true,

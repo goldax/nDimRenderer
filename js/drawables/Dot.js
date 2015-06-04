@@ -1,9 +1,10 @@
 "use strict";
 
-var Style = require('../Style');
+var Style = require("../Style");
 
-module.exports = class Dot {
+module.exports = class Dot extends require("./Drawable") {
 	constructor(position, style) {
+		super();
 		this.position = position;
 		this.style = new Style(style);
 	}
@@ -13,10 +14,12 @@ module.exports = class Dot {
 		}, 0)];
 	}
 	draw(context, projection) {
+		var width = this.style.stroke.width;
+		if(!width)
+			return;
 		context.beginPath();
 		context.fillStyle = this.style.stroke.color;
 		var pos = projection(this.position);
-		var width = this.style.stroke.width;
 		if(this.style.stroke.cap === "round") {
 			context.arc(pos.get(0), pos.get(1), width / 2, 0, 2 * Math.PI);
 		}

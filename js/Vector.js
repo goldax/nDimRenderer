@@ -2,34 +2,32 @@
 
 class Vector {
 	constructor(input) {
-		if(Array.isArray(input)) {
+		if(Array.isArray(input) || input instanceof Float64Array) {
 			this.values = input;
 		}
 		else if(input instanceof Vector) {
-			this.values = input.values.map(function(v) {
-				return v;
-			});
+			this.values = input.values instanceof Float64Array ? new Float64Array(input.values.buffer.slice()) : input.values.slice();
 		}
 		else {
-			this.values = Array.prototype.slice.call(arguments, 0);
+			this.values = Array.prototype.slice.call(arguments);
 		}
 	}
 	get length() {
 		return Math.sqrt(this.lengthSquare);
 	}
 	get lengthSquare() {
-		return this.values.reduce(function(sum, val) {
+		return this.reduce(function(sum, val) {
 			return sum + val * val;
 		}, 0);
 	}
 	get manhattenLength() {
-		return this.values.reduce(function(res, val) {
-			return res + val;
+		return this.reduce(function(sum, val) {
+			return sum + val;
 		}, 0);
 	}
 	get absManhattenLength() {
-		return this.values.reduce(function(res, val) {
-			return res + Math.abs(val);
+		return this.reduce(function(sum, val) {
+			return sum + Math.abs(val);
 		}, 0);
 	}
 	get dim() {
@@ -49,22 +47,23 @@ class Vector {
 			}
 		}
 		else {
-			throw new TypeError("Das läuft hier alles nicht iwi.");
+			throw new TypeError("set requires either an index-value-pair or a new values array.");
 		}
+		return this;
 	}
 	clone() {
 		return new Vector(this);
 	}
 	add(vec) {
 		dimensionTest(this, vec);
-		this.values.forEach(function(val, i) {
-			this[i] += vec.values[i];
-		}, this.values);
+		for(var i = 0; i < this.values.length; i++) {
+			this.values[i] += vec.values[i];
+		}
 		return this;
 	}
 	dot(vec) {
 		dimensionTest(this, vec);
-		return this.values.reduce(function(sum, val, i) {
+		return this.reduce(function(sum, val, i) {
 			return sum + val * vec.values[i];
 		}, 0);
 	}
@@ -72,11 +71,19 @@ class Vector {
 		if(isNaN(+fac)) {
 			throw new TypeError("Factor is not a number.");
 		}
-		this.values.forEach(function(val, i) {
-			this[i] *= fac;
-		}, this.values);
+		for(var i = 0; i < this.values.length; i++) {
+			this.values[i] *= fac;
+		}
 		return this;
 	}
+
+	reduce(fun, init) {
+		for (var i = 0; i < this.values.length; i++) {
+			init = fun(init, this.values[i], i);
+		}
+		return init;
+	}
+
 	get normalized() {
 		return this.clone().normalize();
 	}

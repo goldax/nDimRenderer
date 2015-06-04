@@ -1,6 +1,6 @@
 "use strict";
 
-var Vector = require('./Vector');
+var Vector = require("./Vector");
 
 module.exports = class CordinateSystem {
 	constructor(axes) {
@@ -13,13 +13,13 @@ module.exports = class CordinateSystem {
 		}
 	}
 
-	project(vec) {
+	project(center, vec) {
 		var that = this;
-		return vec.values.reduce(function(res, val, i) {
+		return vec.reduce(function(res, val, i) {
 			if(i >= that.axes.length) {
 				return res;
 			}
 			return res.add(that.axes[i].clone().scale(val));
-		}, new Vector(400, 300));
+		}, center.clone());
 	}
 };
