@@ -14,6 +14,9 @@ module.exports = class Dot extends require("./Drawable") {
 		}, 0)];
 	}
 	draw(context, projection) {
+		if(+this.style.hidden) {
+			return;
+		}
 		var width = this.style.stroke.width;
 		if(!width)
 			return;

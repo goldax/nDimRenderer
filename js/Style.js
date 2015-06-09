@@ -7,7 +7,8 @@ const defaultStyle = {
 		width: 1,
 		cap: "round"
 	},
-	priority: 0
+	priority: 0,
+	hidden: false
 };
 
 module.exports = class Style {

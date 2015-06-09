@@ -25,6 +25,9 @@ module.exports = class Triangle extends require("./Drawable") {
 		return [this.style.priority, -1, verts[0].clone().add(verts[1]).add(verts[2]).scale(1 / 3).manhattenLength];
 	}
 	draw(context, projection) {
+		if(+this.style.hidden) {
+			return;
+		}
 		context.beginPath();
 		var pos1 = projection(this.vertices[0]),
 			pos2 = projection(this.vertices[1]),

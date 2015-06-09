@@ -55,7 +55,8 @@ var dimensions = [
 	],
 	factor = 100,
 	zero = new Vector(0, 0, 0, 0, 0, 0),
-	colors = ["#f00", "#0f0", "#00f", "#ff0", "#0ff", "#f0f"];
+	colors = ["#f00", "#0f0", "#00f", "#ff0", "#0ff", "#f0f"],
+	showDimensions = true;
 
 for(let i in dimensions) {
 	let a = new Array(dimensions.length * 2).fill(0);
@@ -63,6 +64,11 @@ for(let i in dimensions) {
 	canvasManager.addObject(new Line(zero, new Vector(a), {
 		stroke: {
 			color: colors[i]
+		},
+		hidden: {
+			valueOf() {
+				return !showDimensions;
+			}
 		}
 	}));
 }
@@ -90,5 +96,9 @@ document.getElementById("canvas").addEventListener("mousemove", function(e) {
 document.getElementById("canvas").addEventListener("mouseup", function(e) {
 	selected = null;
 }, false);
-
+document.addEventListener("keyup", function(e) {
+	if(e.keyCode === 72) {
+		showDimensions = !showDimensions;
+	}
+}, false);
 canvasManager.coord = new CoordinateSystem(dimensions);
