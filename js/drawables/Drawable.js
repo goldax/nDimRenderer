@@ -14,6 +14,6 @@ class Drawable {
 	draw() {}
 }
 
-Drawable.prototype.priority = [0, 0];
+Drawable.prototype.priority = [0, 0, 0];
 
 module.exports = Drawable;

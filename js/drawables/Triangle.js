@@ -22,7 +22,7 @@ module.exports = class Triangle extends require("./Drawable") {
 	}
 	get priority() {
 		var verts = this.vertices;
-		return [-1, verts[0].clone().add(verts[1]).add(verts[2]).scale(1 / 3).manhattenLength];
+		return [this.style.priority, -1, verts[0].clone().add(verts[1]).add(verts[2]).scale(1 / 3).manhattenLength];
 	}
 	draw(context, projection) {
 		context.beginPath();

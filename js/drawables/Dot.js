@@ -9,7 +9,7 @@ module.exports = class Dot extends require("./Drawable") {
 		this.style = new Style(style);
 	}
 	get priority() {
-		return [1, this.position.values.reduce(function(res, val) {
+		return [this.style.priority, 1, this.position.values.reduce(function(res, val) {
 			return res + val;
 		}, 0)];
 	}

@@ -11,7 +11,7 @@ module.exports = class Line extends require("./Drawable") {
 		this.style = new Style(style);
 	}
 	get priority() {
-		return [0, Vector.interpolate(this.position1, this.position2, 0.5).reduce(function(res, val) {
+		return [this.style.priority,0, Vector.interpolate(this.position1, this.position2, 0.5).reduce(function(res, val) {
 			return res + val;
 		}, 0)];
 	}

@@ -6,7 +6,8 @@ const defaultStyle = {
 		color: "#000",
 		width: 1,
 		cap: "round"
-	}
+	},
+	priority: 0
 };
 
 module.exports = class Style {
@@ -28,12 +29,12 @@ function mergeObject(obj, preset, target) {
 			let value;
 			Object.defineProperty(res, key, {
 				get() {
-					return value;
-				},
-				set(newValue) {
-					value = mergeObject(newValue, preset[key]);
-				},
-				enumerable: true
+						return value;
+					},
+					set(newValue) {
+						value = mergeObject(newValue, preset[key]);
+					},
+					enumerable: true
 			});
 			res[key] = obj[key];
 		}

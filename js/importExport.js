@@ -15,7 +15,7 @@ module.exports = function importOBJ(data) {
 	for(let line of lines) {
 		line = line.split(/\s+/);
 		if(line[0] === "v") {
-			let array = new Float64Array(line.slice(1));
+			let array = line.slice(1);
 			verts.push(new Vector(array));
 		}
 		else if(line[0] === "f") {
