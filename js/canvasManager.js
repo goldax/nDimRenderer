@@ -36,15 +36,17 @@ var center,
 		}
 	};
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-center = new Vector(window.innerWidth / 2, window.innerHeight / 2);
-console.log(window.innerWidth / 2, window.innerHeight / 2);
+canvas.width = window.innerWidth * window.devicePixelRatio;
+canvas.height = window.innerHeight * window.devicePixelRatio;
+center = new Vector(window.innerWidth / 2,  window.innerHeight / 2);
+console.log(window.innerWidth / 2,  window.innerHeight / 2);
+context.scale(window.devicePixelRatio, window.devicePixelRatio);
 
 window.addEventListener("resize", function() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	canvas.width = window.innerWidth * window.devicePixelRatio;
+	canvas.height = window.innerHeight * window.devicePixelRatio;
 	center = new Vector(window.innerWidth / 2, window.innerHeight / 2);
+	context.scale(window.devicePixelRatio, window.devicePixelRatio);
 }, true);
 
 function render() {

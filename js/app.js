@@ -19,7 +19,7 @@ for(var i = 0; i < Math.pow(2, dim); i++) {
 for(var i = 0; i < dim; i++) {
 
 }*/
-fetch("/obj/deer.obj").then(function(response) {
+fetch("obj/deer.obj").then(function(response) {
 	return response.text();
 }).then(function(result) {
 	console.log("Model loaded.");
